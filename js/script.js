@@ -1,5 +1,5 @@
 ﻿window.addEventListener('DOMContentLoaded',()=>{
-
+    
     // Tabs
     const tabs = document.querySelectorAll('.tabheader__item')
     const tubcontent=document.querySelectorAll('.tabcontent')
@@ -39,7 +39,7 @@
 
    // Timer
 
-   const deadline='2020-02-01'
+   const deadline='2021-07-01'
 
    function getTimerRemaining(endtime){
        const time = Date.parse(endtime)  - Date.parse(new Date())// к-сть мил. секунд - текущую дату в мил. секундах
@@ -59,28 +59,36 @@
     }
 
 
+    function setClock(selector,endtime){
+        const timer=document.querySelector(selector)
+        const days=timer.querySelector('#days')
+        const hours=timer.querySelector('#hours')
+        const minutes=timer.querySelector('#minutes')
+        const seconds=timer.querySelector('#seconds')
 
+        console.log(timer)
+        console.log(days)
+        console.log(hours)
+        console.log(minutes)
+        console.log(seconds)
 
+        const timeInterval=setInterval(updateClock,1000)
+        function updateClock(){
+            const time = getTimerRemaining(endtime)
 
+            days.innerHTML = time.days;
+            hours.innerHTML=time.hours;
+            minutes.innerHTML=time.minutes;
+            seconds.innerHTML=time.seconds;
 
+            if(time.total <=0){
+                clearInterval(timeInterval)
+            }
+        }
 
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    setClock('.timer',deadline)
 
 
 
