@@ -58,6 +58,13 @@
        }
     }
 
+    function getZero(num){
+        if(num>=0 && num <10){
+            return `0${num}`
+        }else{
+            return num
+        }
+    }
 
     function setClock(selector,endtime){
         const timer=document.querySelector(selector)
@@ -66,20 +73,14 @@
         const minutes=timer.querySelector('#minutes')
         const seconds=timer.querySelector('#seconds')
 
-        console.log(timer)
-        console.log(days)
-        console.log(hours)
-        console.log(minutes)
-        console.log(seconds)
-
         const timeInterval=setInterval(updateClock,1000)
         function updateClock(){
             const time = getTimerRemaining(endtime)
 
-            days.innerHTML = time.days;
-            hours.innerHTML=time.hours;
-            minutes.innerHTML=time.minutes;
-            seconds.innerHTML=time.seconds;
+            days.innerHTML =getZero(time.days);
+            hours.innerHTML=getZero(time.hours);
+            minutes.innerHTML=getZero(time.minutes);
+            seconds.innerHTML=getZero(time.seconds);
 
             if(time.total <=0){
                 clearInterval(timeInterval)
