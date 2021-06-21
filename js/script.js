@@ -1,4 +1,6 @@
 ﻿window.addEventListener('DOMContentLoaded',()=>{
+
+    // Tabs
     const tabs = document.querySelectorAll('.tabheader__item')
     const tubcontent=document.querySelectorAll('.tabcontent')
     const tubsParent = document.querySelector('.tabheader__items')
@@ -28,14 +30,33 @@
         if(target && target.classList.contains('tabheader__item')){
             tabs.forEach((tab,i)=>{
                 if(tab==target){
-                    console.log(tab)
-                    console.log(target)
                     hideAllTabContent()
                     showTubContent(i)
                 }
             })
         }
    })
+
+   // Timer
+
+   const deadline='2020-02-01'
+
+   function getTimerRemaining(endtime){
+       const time = Date.parse(endtime)  - Date.parse(new Date())// к-сть мил. секунд - текущую дату в мил. секундах
+
+       const days=Math.floor(time/(1000 * 60 * 60 * 24 ))
+       const hours=Math.floor((time / 1000 * 60 * 60) % 24)
+       const minutes = Math.floor((time / 1000 / 60) % 60)
+       const seconds=Math.floor((time / 1000) % 60)
+
+       return{
+           'total':time,
+           'days':days,
+           'hours':hours,
+           'minutes':minutes,
+           'seconds':seconds
+       }
+    }
 
 
 
