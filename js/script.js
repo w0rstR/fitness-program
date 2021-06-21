@@ -1,11 +1,12 @@
 ﻿window.addEventListener('DOMContentLoaded',()=>{
     const tabs = document.querySelectorAll('.tabheader__item')
     const tubcontent=document.querySelectorAll('.tabcontent')
-    const tubsParent = document.querySelectorAll('.tabheader__items')
+    const tubsParent = document.querySelector('.tabheader__items')
 
     function hideAllTabContent(){
         tubcontent.forEach((item)=>{
-            item.style.display='none';
+            item.classList.add('hide')
+            item.classList.remove('show','fade')
         })
 
         tabs.forEach((tub)=>{
@@ -14,14 +15,27 @@
     }
 
     function showTubContent(i){
-        tubcontent[i].style.display='block';
-        tubs[i].classList.classList.add('tabheader__item_active')
+        tubcontent[i].classList.add('show','fade');
+        tubcontent[i].classList.remove('hide')
+        tabs[i].classList.add('tabheader__item_active')
 
     }
+    hideAllTabContent()
+    showTubContent(0)
 
-
-
-
+   tubsParent.addEventListener('click',(event)=>{
+        const target=event.target
+        if(target && target.classList.contains('tabheader__item')){
+            tabs.forEach((tab,i)=>{
+                if(tab==target){
+                    console.log(tab)
+                    console.log(target)
+                    hideAllTabContent()
+                    showTubContent(i)
+                }
+            })
+        }
+   })
 
 
 
