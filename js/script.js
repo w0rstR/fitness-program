@@ -118,4 +118,10 @@
             closeModalWindow()
         }
     })
+
+    document.addEventListener('keydown',(event)=>{
+        if(event.code === "Escape" && modalWindow.classList.contains('show')){
+            closeModalWindow()
+        }
+    })
 })
