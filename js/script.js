@@ -98,13 +98,15 @@
     const modalCloseBtn=document.querySelector('[data-close]')
 
     modalTrigger.addEventListener('click',()=>{
-        modalWindow.classList.add('show')
-        modalWindow.classList.remove('hide')
+        // modalWindow.classList.add('show')
+        // modalWindow.classList.remove('hide')
+        modalWindow.classList.toggle('show')
         document.body.style.overflow='hidden'
     })
    
     modalCloseBtn.addEventListener('click',()=>{
-        modalWindow.classList.add('hide')
-        modalWindow.classList.remove('show')
+        // modalWindow.classList.add('hide')
+        // modalWindow.classList.remove('show')
+        modalWindow.classList.toggle('show')
     })
 })
