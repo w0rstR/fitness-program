@@ -97,9 +97,12 @@
     const modalWindow=document.querySelector('.modal')
     const modalCloseBtn=document.querySelector('[data-close]')
 
+    const modalTimerId=setTimeout(showModalWindow, 2000);
+
     function closeModalWindow(){
         modalWindow.classList.toggle('show')
         document.body.style.overflow=''
+        clearInterval(modalTimerId)
     }
 
     function showModalWindow(){
