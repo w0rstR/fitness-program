@@ -112,4 +112,11 @@
         modalWindow.classList.toggle('show')
         document.body.style.overflow=''
     })
+
+    modalWindow.addEventListener('click',(event)=>{
+        if(event.target === modalWindow){
+            modalWindow.classList.toggle('show')
+            document.body.style.overflow=''
+        }
+    })
 })
