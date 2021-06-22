@@ -97,26 +97,25 @@
     const modalWindow=document.querySelector('.modal')
     const modalCloseBtn=document.querySelector('[data-close]')
 
-    modalTrigger.forEach(btn=>{
-        btn.addEventListener('click',()=>{
-            // modalWindow.classList.add('show')
-            // modalWindow.classList.remove('hide')
-            modalWindow.classList.toggle('show')
-            document.body.style.overflow='hidden'
-        })
-    })
-
-    modalCloseBtn.addEventListener('click',()=>{
-        // modalWindow.classList.add('hide')
-        // modalWindow.classList.remove('show')
+    function closeModalWindow(){
         modalWindow.classList.toggle('show')
         document.body.style.overflow=''
+    }
+
+    function showModalWindow(){
+        modalWindow.classList.toggle('show')
+        document.body.style.overflow=''
+    }
+
+    modalTrigger.forEach(btn=>{
+        btn.addEventListener('click',showModalWindow)
     })
+
+    modalCloseBtn.addEventListener('click',closeModalWindow)
 
     modalWindow.addEventListener('click',(event)=>{
         if(event.target === modalWindow){
-            modalWindow.classList.toggle('show')
-            document.body.style.overflow=''
+            closeModalWindow()
         }
     })
 })
