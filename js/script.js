@@ -127,4 +127,15 @@
             closeModalWindow()
         }
     })
+
+    function showModayWindowByScroll(){
+        if(window.pageYOffset+document.documentElement.clientHeight >= document.documentElement.scrollHeight){
+            showModalWindow()
+            window.removeEventListener('scroll',showModayWindowByScroll)
+        }
+    }
+
+    window.addEventListener('scroll',showModayWindowByScroll)
+
+
 })
