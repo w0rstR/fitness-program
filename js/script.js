@@ -91,11 +91,20 @@
 
     setClock('.timer',deadline)
 
+    // Modal window
 
+    const modalTrigger=document.querySelector('[data-modal]')
+    const modalWindow=document.querySelector('.modal')
+    const modalCloseBtn=document.querySelector('[data-close]')
 
-
-
-
-
-
+    modalTrigger.addEventListener('click',()=>{
+        modalWindow.classList.add('show')
+        modalWindow.classList.remove('hide')
+        document.body.style.overflow='hidden'
+    })
+   
+    modalCloseBtn.addEventListener('click',()=>{
+        modalWindow.classList.add('hide')
+        modalWindow.classList.remove('show')
+    })
 })
