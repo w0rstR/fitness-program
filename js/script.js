@@ -266,14 +266,7 @@
             statusMessage.style.cssText= "display:block; margin:0 auto;"
             
             form.insertAdjacentElement('afterend',statusMessage)
-
-            const formData= new FormData(form);
-            
-            // const object={}
-            // formData.forEach(function(value,key){
-            //     object[key]=value
-            // })
-            // const json = JSON.stringify(object)
+            const formData=new FormData(form);
 
             fetch('server.php',{
                 method:'POST',
@@ -317,17 +310,5 @@
             closeModalWindow()
         }, 4000);
     }
-
-
-    // fetch('https://jsonplaceholder.typicode.com/posts',{
-    //     method: 'POST',
-    //     body:JSON.stringify({name:'Alex'}),
-    //     headers:{
-    //         'Content-type': 'application/json'
-    //     }
-    // })
-    // .then(response => response.json())
-    // .then(json => console.log(json))
-
 
 })
