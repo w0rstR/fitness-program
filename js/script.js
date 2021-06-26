@@ -206,51 +206,91 @@
     }
 
     forms.forEach(item=>{
-        postData(item);
+        postDataNew(item);
     })
 
-    function postData(form){
+    // function postData(form){
+    //     form.addEventListener('submit',(event)=>{
+    //         event.preventDefault();
+
+    //         const statusMessage = document.createElement('img')
+    //         statusMessage.src = message.loading
+    //         statusMessage.style.cssText= "display:block; margin:0 auto;"
+    //         //form.append(statusMessage);
+    //         form.insertAdjacentElement('afterend',statusMessage)
+
+
+    //         ///////////////////////////////////////////////////
+    //         // const request = new XMLHttpRequest();
+    //         // request.open('POST','../server.php')
+    //         // //request.setRequestHeader('Content-type','multipart//form-data')
+    //         // const formData = new FormData(form)
+
+    //         // FOR JSON 
+    //         const request = new XMLHttpRequest();
+
+    //         request.open('POST','../server.php')
+    //         request.setRequestHeader('Content-type','application/json')
+    //         const formData= new FormData(form);
+            
+    //         const object={}
+    //         formData.forEach(function(value,key){
+    //             object[key]=value
+    //         })
+    //         const json = JSON.stringify(object)
+
+    //         request.send(json)
+    //         request.addEventListener('load',()=>{
+    //             if(request.status === 200){
+    //                 console.log(request.response)
+    //                 showThanksModal(message.success)
+    //                 form.reset();
+    //                 statusMessage.remove(); 
+    //             }else{
+    //                 showThanksModal(message.failuere)
+    //             }
+    //         })
+        
+    //     })
+    // }
+    function postDataNew(form){
+        // USING FETCH
+        // 2 There are two options for sending data
+        // 1 - formdata
+        // 2 - json
         form.addEventListener('submit',(event)=>{
             event.preventDefault();
 
             const statusMessage = document.createElement('img')
             statusMessage.src = message.loading
             statusMessage.style.cssText= "display:block; margin:0 auto;"
-            //form.append(statusMessage);
+            
             form.insertAdjacentElement('afterend',statusMessage)
 
-
-            ///////////////////////////////////////////////////
-            // const request = new XMLHttpRequest();
-            // request.open('POST','../server.php')
-            // //request.setRequestHeader('Content-type','multipart//form-data')
-            // const formData = new FormData(form)
-
-            // FOR JSON 
-            const request = new XMLHttpRequest();
-
-            request.open('POST','../server.php')
-            request.setRequestHeader('Content-type','application/json')
             const formData= new FormData(form);
             
-            const object={}
-            formData.forEach(function(value,key){
-                object[key]=value
-            })
-            const json = JSON.stringify(object)
+            // const object={}
+            // formData.forEach(function(value,key){
+            //     object[key]=value
+            // })
+            // const json = JSON.stringify(object)
 
-            request.send(json)
-            request.addEventListener('load',()=>{
-                if(request.status === 200){
-                    console.log(request.response)
-                    showThanksModal(message.success)
-                    form.reset();
-                    statusMessage.remove(); 
-                }else{
-                    showThanksModal(message.failuere)
-                }
+            fetch('server.php',{
+                method:'POST',
+                // headers:{
+                //     "Content-type":'application/json'
+                // },
+                body:formData
+            }).then(data=>data.text())
+            .then(data=>{
+                console.log(data)
+                showThanksModal(message.success)
+                statusMessage.remove()
+            }).catch(()=>{
+                showThanksModal(message.failuere)
+            }).finally(()=>{
+                form.reset()
             })
-        
         })
     }
 
@@ -279,15 +319,15 @@
     }
 
 
-
-
-
-
-
-
-
-
-
+    // fetch('https://jsonplaceholder.typicode.com/posts',{
+    //     method: 'POST',
+    //     body:JSON.stringify({name:'Alex'}),
+    //     headers:{
+    //         'Content-type': 'application/json'
+    //     }
+    // })
+    // .then(response => response.json())
+    // .then(json => console.log(json))
 
 
 })
