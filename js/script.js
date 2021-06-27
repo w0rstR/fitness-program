@@ -206,7 +206,7 @@
     }
 
     forms.forEach(item=>{
-        postDataNew(item);
+        bindPostData(item);
     })
 
     // function postData(form){
@@ -253,7 +253,19 @@
         
     //     })
     // }
-    function postDataNew(form){
+
+    const postData = async(url, data)=>{
+        const result = await fetch(url,{
+            method:'POST',
+            headers:{
+                'Content-type': 'application/json'
+            },
+            body:data
+        })
+
+        return  await result.json()
+    }
+    function bindPostData(form){
         // USING FETCH
         // 2 There are two options for sending data
         // 1 - formdata
@@ -273,13 +285,8 @@
                 object[key]=value
             })
 
-            fetch('server.php',{
-                method:'POST',
-                headers:{
-                    "Content-type":'application/json'
-                },
-                body:JSON.stringify(object)
-            }).then(data=>data.text())
+           
+            postData('http://localhost:3000/requests',JSON.stringify(object))
             .then(data=>{
                 console.log(data)
                 showThanksModal(message.success)
@@ -317,8 +324,8 @@
     }
 
 
-    fetch('http://localhost:3000/menu')
-    .then(data=>data.json())
-    .then(data=>console.log(data))
+    // fetch('http://localhost:3000/menu')
+    // .then(data=>data.json())
+    // .then(data=>console.log(data))
 
 })
