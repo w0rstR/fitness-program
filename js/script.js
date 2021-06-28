@@ -384,4 +384,45 @@
     // .then(data=>data.json())
     // .then(data=>console.log(data))
 
+    // Slider
+
+    const slides=document.querySelectorAll('.offer__slide')
+    const btnNext=document.querySelector('.offer__slider-next')
+    const btnPrev=document.querySelector('.offer__slider-prev')
+    let slideIndex=0
+    slides.forEach(slide=>{
+        console.log(slide)
+    })
+
+    slides.forEach(slide=>{
+        slide.classList.add('hide')
+    })
+    slides[0].classList.remove('hide')
+
+    
+
+    btnNext.addEventListener('click',()=>{
+        slideIndex++
+        if(slideIndex>2){
+            slideIndex=0
+        }
+        slides.forEach(slide=>{
+            slide.classList.add('hide')
+        })
+        slides[slideIndex].classList.remove('hide')
+    })
+
+    btnPrev.addEventListener('click',()=>{
+        slideIndex--
+        if(slideIndex<0){
+            slideIndex=2
+        }
+        slides.forEach(slide=>{
+            slide.classList.add('hide')
+        })
+        slides[slideIndex].classList.remove('hide')
+    })
+
+
+    
 })
