@@ -389,40 +389,85 @@
     const slides=document.querySelectorAll('.offer__slide')
     const btnNext=document.querySelector('.offer__slider-next')
     const btnPrev=document.querySelector('.offer__slider-prev')
-    let slideIndex=0
-    slides.forEach(slide=>{
-        console.log(slide)
-    })
+    let slideIndex=1
+    const total = document.querySelector('#total')
+    const current=document.querySelector('#current')
 
-    slides.forEach(slide=>{
-        slide.classList.add('hide')
+    //THE SECOND OPTION
+    
+    showSlides()
+    if(slides.length<10){
+        total.textContent=`0${slides.length}`
+    }else{
+        total.textContent=`${slides.length}`
+    }
+    function showSlides(index){
+        if(index>slides.length){
+            slideIndex=1
+        }
+
+        if(index<1){
+            slideIndex=slides.length
+        }
+
+        slides.forEach(slide=>{
+            slide.classList.add('hide')
+        })
+
+        slides[slideIndex-1].classList.remove('hide')
+
+        if(slides.length<10){
+            current.textContent=`0${slideIndex}`
+        }else{
+            current.textContent=slideIndex
+        }
+    }
+
+    function plusSlide(n){
+        showSlides(slideIndex+=n)
+    }
+
+    btnNext.addEventListener('click',()=>{
+        plusSlide(1)
     })
-    slides[0].classList.remove('hide')
+    btnPrev.addEventListener('click',()=>{
+        plusSlide(-1)
+    })
+    //////////////////////////////////////////////////
+    // THE FIRST OPTION
+    // slides.forEach(slide=>{
+    //     console.log(slide)
+    // })
+
+    // slides.forEach(slide=>{
+    //     slide.classList.add('hide')
+    // })
+    // slides[0].classList.remove('hide')
 
     
 
-    btnNext.addEventListener('click',()=>{
-        slideIndex++
-        if(slideIndex>2){
-            slideIndex=0
-        }
-        slides.forEach(slide=>{
-            slide.classList.add('hide')
-        })
-        slides[slideIndex].classList.remove('hide')
-    })
+    // btnNext.addEventListener('click',()=>{
+    //     slideIndex++
+    //     if(slideIndex>2){
+    //         slideIndex=0
+    //     }
+    //     slides.forEach(slide=>{
+    //         slide.classList.add('hide')
+    //     })
+    //     slides[slideIndex].classList.remove('hide')
+    // })
 
-    btnPrev.addEventListener('click',()=>{
-        slideIndex--
-        if(slideIndex<0){
-            slideIndex=2
-        }
-        slides.forEach(slide=>{
-            slide.classList.add('hide')
-        })
-        slides[slideIndex].classList.remove('hide')
-    })
-
+    // btnPrev.addEventListener('click',()=>{
+    //     slideIndex--
+    //     if(slideIndex<0){
+    //         slideIndex=2
+    //     }
+    //     slides.forEach(slide=>{
+    //         slide.classList.add('hide')
+    //     })
+    //     slides[slideIndex].classList.remove('hide')
+    // })
+    ////
 
     
 })
