@@ -183,15 +183,32 @@
             this.parent.append(element)
         }
     }
-    new MenuCard(
-        "img/tabs/elite.jpg",
-        'elite',
-        'Меню “Премиум”',
-        'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
-        9,
-        '.menu .container',
-        //'menu__item',
-    ).render() 
+
+    const getResource = async (url)=>{
+        const result = await fetch(url)
+
+        if(!result.ok){
+            throw new Error(`Could not fetch ${url}, status:${result.status}`)
+        }
+        return await result.json()
+    }
+
+    getResource('http://localhost:3000/menu')
+    .then(data=>{
+        data.forEach(({img,altimg,title,descr,price})=>{
+            new MenuCard(img,altimg,title,descr,price, '.menu .container').render()
+        })
+    })
+    
+    // new MenuCard(
+    //     "img/tabs/elite.jpg",
+    //     'elite',
+    //     'Меню “Премиум”',
+    //     'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
+    //     9,
+    //     '.menu .container',
+    //     //'menu__item',
+    // ).render() 
 
 
     // Form
@@ -265,6 +282,8 @@
 
         return  await result.json()
     }
+
+
     function bindPostData(form){
         // USING FETCH
         // 2 There are two options for sending data
