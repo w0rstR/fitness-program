@@ -201,8 +201,18 @@
     // })
     /////////////
 
-    getResource('http://localhost:3000/menu')
-    .then(data=>createCard(data))
+    // getResource('http://localhost:3000/menu')
+    // .then(data=>createCard(data))
+
+    // axios.get('http://localhost:3000/menu')
+    // .then(data=>console.log(data))
+    
+    axios.get('http://localhost:3000/menu')
+        .then(data=>{
+            data.data.forEach(({img,altimg,title,descr,price})=>{
+                new MenuCard(img,altimg,title,descr,price,'.menu .container').render();
+            })
+        })
 
     function createCard(data){
         data.forEach(({img,altimg,title,descr,price})=>{
