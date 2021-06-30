@@ -1,4 +1,4 @@
-﻿{
+{
   "menu": [
     {
       "img": "img/tabs/vegy.jpg",
@@ -37,6 +37,11 @@
       "name": "вфывфы",
       "phone": "3232",
       "id": 3
+    },
+    {
+      "name": "dsadas",
+      "phone": "3232",
+      "id": 4
     }
   ]
 }

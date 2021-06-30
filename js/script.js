@@ -610,4 +610,110 @@
             dots[slideIndex-1].style.opacity=1
         })
     })
+
+
+
+
+    // Calculator
+
+    const result = document.querySelector('.calculating__result span')
+    let sex='female'
+    let height=null
+    let weight=null
+    let age=null
+    let ratio=1.375
+
+
+    function calculateTotal(){
+        if(!sex || !height || !weight || !age || !ratio){
+            result.textContent="________"
+            return;
+        }
+
+        if(sex==='female'){
+            result.textContent=Math.round((447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age))*ratio)
+        }else{
+            result.textContent=Math.round((88.36 + (13.4*weight) + (4.8 * height) - (5.7 *age))*ratio)
+        }
+    }
+    calculateTotal()
+
+    function getStaticInformation(parentSelector,activeClass){
+        const elements = document.querySelectorAll(`${parentSelector} div`)
+        
+        elements.forEach(element=>{
+            element.addEventListener('click',(event)=>{
+                if(event.target.getAttribute('data-ratio')){
+                    ratio= +event.target.getAttribute('data-ratio')
+                }else{
+                    sex = event.target.getAttribute('id')
+                }
+    
+                console.log(ratio)
+                console.log(sex)
+                
+                elements.forEach(elem=>{
+                    elem.classList.remove(activeClass)
+                })
+                event.target.classList.add(activeClass)
+                
+                calculateTotal()
+            })
+        })
+
+        // other option with BUG
+        // document.querySelector(parentSelector).addEventListener('click',(event)=>{
+        //     if(event.target.getAttribute('data-ratio')){
+        //         ratio= +event.target.getAttribute('data-ratio')
+        //     }else{
+        //         sex = event.target.getAttribute('id')
+        //     }
+
+        //     console.log(ratio)
+        //     console.log(sex)
+            
+        //     elements.forEach(elem=>{
+        //         elem.classList.remove(activeClass)
+        //     })
+        //     event.target.classList.add(activeClass)
+            
+        //     calculateTotal()
+        // })
+    }
+
+    getStaticInformation('#gender','calculating__choose-item_active')
+
+    getStaticInformation('.calculating__choose_big','calculating__choose-item_active')
+
+
+    function getDynamicInformation(selector){
+        const input = document.querySelector(selector)
+
+        input.addEventListener('input',()=>{
+            switch(input.getAttribute('id')){
+                case 'height':
+                    height=+input.value
+                    break;
+                case 'weight':
+                    weight=+input.value
+                    break
+                case 'age':
+                    age=+input.value
+                    break
+            }
+            calculateTotal()
+        })
+        
+    }
+
+    getDynamicInformation('#height')
+    getDynamicInformation('#weight')
+    getDynamicInformation('#age')
+
+
+
+
+
+
+
 })
