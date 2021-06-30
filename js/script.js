@@ -617,13 +617,47 @@
     // Calculator
 
     const result = document.querySelector('.calculating__result span')
-    let sex='female'
-    let height=null
-    let weight=null
-    let age=null
-    let ratio=1.375
+    let sex=0
+    let height=0
+    let weight=0
+    let age=0
+    let ratio=0
 
+    if(localStorage.getItem('sex')){
+        sex=localStorage.getItem('sex')
+    }else{
+        sex='female'
+        localStorage.setItem('sex','female')
+    }
 
+    if(localStorage.getItem('ratio')){
+        ratio=localStorage.getItem('ratio')
+    }else{
+        ratio=1.375
+        localStorage.setItem('ratio',1.375)
+    }
+  
+
+    function initLocalSettings(selector,activeClass){
+        const elements = document.querySelectorAll(selector)
+
+        elements.forEach(element=>{
+            element.classList.remove(activeClass)
+            if(element.getAttribute('id') === localStorage.getItem('sex')){
+                element.classList.add(activeClass)
+            }
+
+            if(element.getAttribute('data-ratio') === localStorage.getItem('ratio')){
+                element.classList.add(activeClass)
+            }
+        })
+        
+    }
+
+    initLocalSettings('#gender div', 'calculating__choose-item_active');
+    initLocalSettings('.calculating__choose_big div', 'calculating__choose-item_active');
+    
+    
     function calculateTotal(){
         if(!sex || !height || !weight || !age || !ratio){
             result.textContent="________"
@@ -638,28 +672,28 @@
     }
     calculateTotal()
 
-    function getStaticInformation(parentSelector,activeClass){
-        const elements = document.querySelectorAll(`${parentSelector} div`)
-        
-        elements.forEach(element=>{
-            element.addEventListener('click',(event)=>{
-                if(event.target.getAttribute('data-ratio')){
-                    ratio= +event.target.getAttribute('data-ratio')
-                }else{
-                    sex = event.target.getAttribute('id')
+    function getStaticInformation(selector,activeClass){
+        const elements = document.querySelectorAll(selector);
+
+        elements.forEach(element => {
+            element.addEventListener('click', (event) => {
+                if (event.target.getAttribute('data-ratio')) {
+                    ratio = +event.target.getAttribute('data-ratio');
+                    localStorage.setItem('ratio', +event.target.getAttribute('data-ratio'));
+                } else {
+                    sex = event.target.getAttribute('id');
+                    localStorage.setItem('sex', event.target.getAttribute('id'));
                 }
     
-                console.log(ratio)
-                console.log(sex)
-                
-                elements.forEach(elem=>{
-                    elem.classList.remove(activeClass)
-                })
-                event.target.classList.add(activeClass)
-                
-                calculateTotal()
-            })
-        })
+                elements.forEach(element => {
+                    element.classList.remove(activeClass);
+                });
+    
+                event.target.classList.add(activeClass);
+    
+                calcTotal();
+            });
+        });
 
         // other option with BUG
         // document.querySelector(parentSelector).addEventListener('click',(event)=>{
@@ -670,7 +704,7 @@
         //     }
 
         //     console.log(ratio)
-        //     console.log(sex)
+        //     console.log(sex)3
             
         //     elements.forEach(elem=>{
         //         elem.classList.remove(activeClass)
@@ -681,15 +715,19 @@
         // })
     }
 
-    getStaticInformation('#gender','calculating__choose-item_active')
-
-    getStaticInformation('.calculating__choose_big','calculating__choose-item_active')
-
+    getStaticInformation('#gender div', 'calculating__choose-item_active');
+    getStaticInformation('.calculating__choose_big div', 'calculating__choose-item_active');
 
     function getDynamicInformation(selector){
         const input = document.querySelector(selector)
 
         input.addEventListener('input',()=>{
+
+            if(input.value.match(/\D/g)){//не число
+                input.style.border='1px solid red'
+            }else{
+                input.style.border='none'
+            }
             switch(input.getAttribute('id')){
                 case 'height':
                     height=+input.value
