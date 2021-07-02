@@ -1,4 +1,5 @@
-﻿function cards(){
+﻿import { getResource } from "../services/services";
+function cards(){
     class MenuCard{
         constructor(src,alt,title,descr,price,perentSelector,...classes) {
             this.src=src;
@@ -42,14 +43,16 @@
         }
     }
 
-    const getResource = async (url)=>{
-        const result = await fetch(url)
+    // перенис в папку services
+    // const getResource = async (url)=>{
+    //     const result = await fetch(url)
 
-        if(!result.ok){
-            throw new Error(`Could not fetch ${url}, status:${result.status}`)
-        }
-        return await result.json()
-    }
+    //     if(!result.ok){
+    //         throw new Error(`Could not fetch ${url}, status:${result.status}`)
+    //     }
+    //     return await result.json()
+    // }
+
     ////////
     // getResource('http://localhost:3000/menu')
     // .then(data=>{
@@ -94,7 +97,9 @@
     }
 }
 
-module.exports = cards;
+// module.exports = cards;
+
+export default cards
 
 // new MenuCard(
     //     "img/tabs/elite.jpg",

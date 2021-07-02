@@ -1,6 +1,5 @@
-﻿function timer(){
-    const deadline='2021-08-07'
-
+﻿function timer(id,deadline){
+    
    function getTimerRemaining(endtime){
        const time = Date.parse(endtime)  - Date.parse(new Date())// к-сть мил. секунд - текущую дату в мил. секундах
 
@@ -49,7 +48,9 @@
 
     }
 
-    setClock('.timer',deadline)
+    setClock(id,deadline)
 }
 
-module.exports = timer
+// module.exports = timer
+
+export default timer

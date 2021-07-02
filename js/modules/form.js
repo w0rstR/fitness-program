@@ -1,5 +1,7 @@
-﻿function form(){
-    const forms= document.querySelectorAll('form')
+﻿import {closeModalWindow,showModalWindow} from './modal'
+import {postData} from '../services/services'
+function form(formSelector,modalTimerId){
+    const forms= document.querySelectorAll(formSelector)
 
 
     const message={
@@ -57,17 +59,18 @@
     //     })
     // }
 
-    const postData = async(url, data)=>{
-        const result = await fetch(url,{
-            method:'POST',
-            headers:{
-                'Content-type': 'application/json'
-            },
-            body:data
-        })
+    // переніс в папаку services
+    // const postData = async(url, data)=>{
+    //     const result = await fetch(url,{
+    //         method:'POST',
+    //         headers:{
+    //             'Content-type': 'application/json'
+    //         },
+    //         body:data
+    //     })
 
-        return  await result.json()
-    }
+    //     return  await result.json()
+    // }
 
 
     function bindPostData(form){
@@ -111,7 +114,7 @@
         const prevModalDialog = document.querySelector('.modal__dialog')
         prevModalDialog.classList.add('hide');
 
-        showModalWindow();
+        showModalWindow('.modal',modalTimerId);
 
         const thanksModal = document.createElement('div')
         thanksModal.classList.add('modal__dialog')
@@ -127,9 +130,11 @@
             thanksModal.remove()
             prevModalDialog.classList.add('show')
             prevModalDialog.classList.remove('hide')
-            closeModalWindow()
+            closeModalWindow('.modal')
         }, 4000);
     }
 }
 
-module.exports = form
+// module.exports = form
+
+export default form
